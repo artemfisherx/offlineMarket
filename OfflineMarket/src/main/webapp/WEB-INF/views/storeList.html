@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html th:replace="~{typical::typical(~{::title}, ~{::main})}">
+<head>
+<title>Store list</title>
+</head>
+<body>
+<main>
+	<p><a th:href="@{/store(getbalance=true)}" th:text="#{storelist_get_balance}"></a>
+	<table>
+		<tr>
+			<th>#</th>
+			<th>ID</th>
+			<th>Name</th>
+			<th></th>
+			<th></th>	
+		</tr>	
+		<tr th:each="store : ${stores}">
+			<td th:text="${storeStat.count}"></td>
+			<td th:text="${store.id}"></td>
+			<td th:text="${store.name}"></td>
+			<td><a th:href="@{'/store/edit/' + ${store.id}}">Edit</a></td>
+			<td><a th:href="@{/store(delete=${store.id})}">Delete</a></td>
+		</tr>	
+		
+	</table>
+</main>
+
+</body>
+</html>

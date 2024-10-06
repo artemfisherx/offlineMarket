@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html th:replace="~{typical::typical(~{::title}, ~{::main})}">
+<head>
+<meta charset="UTF-8">
+<title>Goods list</title>
+</head>
+<body>
+<main>
+	<a th:href="@{/item/add}" th:text="#{itemlist_add_new}"></a>
+	<table>
+		<tr>
+			<td>#</td>
+			<td th:text="#{itemlist_table_id}"></td>
+			<td th:text="#{itemlist_table_number}">
+			<td th:text="#{itemlist_table_name}"></td>
+			<td th:text="#{itemlist_table_manufacturer}"></td>
+			<td th:text="#{itemlist_table_supplier}"></td>
+			<td th:text="#{itemlist_table_type}"></td>
+			<td th:text="#{itemlist_table_image}"></td>				
+			<td></td>		
+		</tr>
+		<tr th:each="item : ${items}">
+			<td th:text="${itemStat.count}"></td>
+			<td th:text="${item.id}"></td>
+			<td th:text="${item.itemNumber}"></td>
+			<td th:text="${item.name}"></td>
+			<td th:text="${item.manufacturer.name}"></td>
+			<td th:text="${item.supplier.name}"></td>
+			<td th:text="${item.itemType}"></td>
+			<td><img th:src="@{'/images/' + ${item.image}}" class="itemListImage"></td>			
+			<td><a th:href="@{'/item/edit/' + ${item.id}}" th:text="#{action_edit}"></td>
+			<td><a th:href="@{'/item?delete=' + ${item.id}}" th:text="#{action_delete}"></td>				
+		</tr>				
+	</table>
+</main>
+
+
+</body>
+</html>

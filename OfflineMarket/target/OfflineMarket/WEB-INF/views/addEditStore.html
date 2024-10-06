@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html th:replace="~{typical::typical(~{::title}, ~{::main})}">
+<head>
+<meta charset="UTF-8">
+<title>Store</title>
+</head>
+<body>
+<main>
+	<form method="post" th:action="@{/store/save}" th:object="${store}">
+	<input type="hidden" th:field="*{id}">
+	<label th:text="#{form_name}"></label>	
+	<input type="text" th:field="*{name}">
+	<input type="submit" th:value="#{form_submit_save}">
+	</form>
+</main>
+</body>
+</html>

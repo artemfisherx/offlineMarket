@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html th:replace="~{typical::typical(~{::title}, ~{::main})}">
+<head>
+<meta charset="UTF-8">
+<title>Item</title>
+</head>
+<body>
+<main>
+	<p th:text="${error}"/>
+	<form th:action="@{/item/save}" th:object="${item}" method="post" enctype="multipart/form-data">
+		<input type="hidden" th:field="*{id}"/>
+		<label th:text="#{form_item_number}"></label><input type="text" th:field="*{itemNumber}"/>
+		<label th:text="#{form_name}"></label><input type="text" th:field="*{name}"/>
+		<label th:text="#{form_manufacturer}"></label> 
+		<select th:field="*{manufacturer}">
+			<option th:each="agent : ${agents}" th:value="${agent}" th:text="${{agent}}"></option>
+		</select>
+				
+		<label th:text="#{form_supplier}">Supplier </label>
+		<select th:field="*{supplier}">
+			<option th:each="agent : ${agents}" th:value="${agent}" th:text="${{agent}}"></option>
+		</select>		
+		
+				
+		<img th:src="@{'/images/'+ *{image}}" class="itemImage" th:if="*{image.length}>0"/>
+		
+		
+		<input type="hidden" th:field="*{image}"/>
+		<input type="file" name="newImage"/>
+		
+		<label th:text="#{form_item_type}"></label>
+		
+		<input type="radio" th:each="type : ${T(mainPackage.Entities.Item.ItemType).values()}" 
+			th:value="${type}" th:text="${type}" th:field="*{itemType}"/>		
+		
+		
+		<input type="submit" th:value="#{form_submit_save}"/>
+		
+	</form>
+</main>
+
+</body>
+</html>

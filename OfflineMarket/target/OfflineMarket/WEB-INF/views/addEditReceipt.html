@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html th:replace="~{typical::typical(~{::title},~{::main})}">
+<head>
+<meta charset="UTF-8">
+<title>Receipt</title>
+</head>
+<body>
+<main>
+<form th:action="@{/receipt/save}" method="post" th:object="${receipt}">
+
+<input type="hidden" th:field="*{id}"/>
+
+<input type="datetime-local" th:field="*{datetime}"/>
+
+<select th:field="*{item}">
+	<option th:each="itm : ${items}" th:value="${itm}" th:text="${{itm}}"></option>
+</select>
+
+<select th:field="*{store}">
+	<option th:each="st : ${stores}" th:value="${st}" th:text="${{st}}"></option>
+</select>
+
+<input type="number" min="1" th:field="*{count}"/>
+
+
+<select th:field="*{supplier}">
+	<option th:each="sup : ${suppliers}" th:value="${sup}" th:text="${{sup}}"></option>
+</select>
+
+
+<input type="submit" th:value="#{form_submit_save}">
+
+</form>
+</main>
+
+</body>
+</html>

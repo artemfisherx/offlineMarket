@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link th:href="@{/styles/style.css}" rel="stylesheet" />
+	
+	<title th:text="#{index_page_title}">Index</title>
+	<meta charset="utf-8">
+	
+</head>
+<body>
+    <header>
+        <div id="logo">
+        </div>
+        <nav>
+            <ul>
+            	<li><a th:href="@{/}" th:text="#{header_main}"></a></li>
+                <li><a th:href="@{/order}" th:text="#{header_orders}"></a></li>
+                <li><a th:href="@{/counteragent}" th:text="#{header_counteragents}">Counteragents</a></li>
+                <li><a th:href="@{/item}" th:text="#{header_items}">Items</a></li>
+                <li><a th:href="@{/store}" th:text="#{header_stores}">Stores</a></li>
+                <li><a th:href="@{/employee}" th:text="#{header_employees}">Employees</a></li>
+                <li><a th:href="@{/report}" th:text="#{header_reports}">Reports</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main id="indexpage">
+        <ul id="list">
+            <li><a th:href="@{/order}" th:text="#{index_order_list}">Order list</a></li>
+            <li><a th:href="@{/counteragent}" th:text="#{index_counteragent_list}">Counteragent list</a></li>
+            <li><a th:href="@{/item}" th:text="#{index_item_list}">Item list</a></li>
+            <li><a th:href="@{/store}" th:text="#{index_store_list}">Store list</a></li>
+            <li><a th:href="@{/employee}" th:text="#{index_employee_list}">Employee list</a></li>
+        </ul>       
+
+        <ul id="add_new">
+            <li><a th:href="@{/order/add}" th:text="#{index_add_new_order}">Add new order</a></li>
+            <li><a th:href="@{/counteragent/add}" th:text="#{index_add_new_counteragent}">Add new counteragent</a></li>
+            <li><a th:href="@{/item/add}" th:text="#{index_add_new_item}">Add new item</a></li>
+            <li><a th:href="@{/store/add}" th:text="#{index_add_new_store}">Add new store</a></li>
+            <li><a th:href="@{/employee/add}" th:text="#{index_add_new_employee}">Add new employee</a></li>  
+        </ul>
+
+        <ul id="add_new_docs">
+            <li><a th:href="@{/receipt/add}" th:text="#{index_add_new_docs_receipt}">Create new receipt of the items</a></li>               
+        </ul>
+
+    </main>
+
+    <footer>
+        <address>
+            <ul>
+                <li><a href="" th:text="#{footer_about}">About</a></li>
+                <li><a href="" th:text="#{footer_contacts}">Contacts</a></li>
+                <li><a href="" th:text="#{footer_github}">Github</a></li>
+            </ul>
+        </address>
+    </footer>
+</body>
+</html>

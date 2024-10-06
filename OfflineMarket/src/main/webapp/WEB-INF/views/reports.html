@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html th:replace="~{typical::typical(~{::title}, ~{::main})}">
+<head>
+<meta charset="UTF-8">
+<title>Reports</title>
+</head>
+<body>
+<main>
+<select id="report">	
+	<option value="1" th:text="#{movement_and_balance_by_date}" selected></option>
+	<option value="2" th:text="#{movement_by_date}"></option>
+	<option value="3" th:text="#{sales_by_employee}"></option>
+	<option value="4" th:text="#{sales_by_period}"></option>
+</select>
+<div>
+<form id="params">
+	<input type="date"/>
+	<input type="submit" value="ok"/>
+</form>
+</div>
+<div id="res">
+</div>
+
+
+<script th:inline="javascript">
+$(document).ready(function()
+{	
+	$("#report").on("change", function(){	
+		
+		var report = $("#report").val();
+		
+		if(report==1) $("#params").html('<input type="date"/><input type="submit" value="ok">');
+		if(report==2) $("#params").html('<input type="date"/><input type="submit" value="ok">');
+		
+		if(report==3) 
+		{
+			var arrEmp = [];
+			var str="";
+			
+			[# th:each="emp : ${employees}"] 
+			arrEmp.push([[${emp}]]);
+			[/]
+			
+			
+			arrEmp.forEach((elem)=>
+				str += `<option value="${elem.id}">${elem.name}</option>`
+			);
+			
+			str = "<select id='emp'>"+str+"<select>";
+			
+			$("#params").html(str);
+			$("#params").append(`<input type="submit" value="ok">`);
+			
+		}
+		
+		if(report==4) $("#params").html('<input type="date" id="start"/> \
+		<input type="date" id="end"/><input type="submit" value="ok">');
+		
+	});
+	
+	$("#params").on("submit", function(event)
+		{
+			event.preventDefault();	
+			
+			var type=$("report").val();
+			
+			if(type==1)
+			{
+				var date = $("date").val();
+				var url = [[@{/report/mbd}]];
+				$.ajax({
+					method:"POST",
+					url:url,
+					data:{date:date}
+				})
+				.done(function(data)
+					{
+						//бросил на этом месте					
+					});
+				
+			}
+			
+			if(type==2)
+			{
+				var date = $("date").val();
+				var url = [[@{/report/md}]];
+			}
+			
+			if(type==3)
+			{
+				var emp = $("emp").val();
+				var url = [[@{/report/se}]];
+			}
+			
+			if(type==4)
+			{
+				var start = $("start").val();
+				var end = $("end").val();
+				var url = [[@{/report/sp}]];
+			}
+		
+		});	
+
+});
+
+
+</script>
+
+</main>
+
+</body>
+</html>

@@ -1,0 +1,241 @@
+/* common */
+
+        *{
+            padding:0;
+            margin:0;          
+        }
+
+        body{
+            min-width: 1000px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center; 
+            font-family: Arial, Helvetica, sans-serif;     
+            --header-height:200px;
+            --footer-height:100px;
+            --main-height:calc(100vh-var(--header-height)-var(--footer-height));      
+        }
+
+        header
+        { 
+            display: flex;
+            flex-direction: column;           
+            height:var(--header-height);   
+            margin-bottom: 20px;     
+            flex: 0 0 auto;   
+        }
+
+        header #logo
+        {
+            height:190px;
+            background-color:moccasin;
+        }
+
+        header nav
+        {
+            height:40px;
+            margin-bottom: 5px;
+            background-color: burlywood;
+        }
+
+        header nav ul{
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;                
+        }    
+
+        header nav ul li{
+            min-width: 100px;
+            width:100%;
+            display: block;  
+            flex-grow: 1;
+        }  
+        
+        header nav ul li a{
+            padding-top: 7px;
+            display: block;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            
+        }
+        
+        header nav ul li:hover{           
+            background-color:coral;                     
+        }
+
+
+        footer {
+            height: var(--footer-height);
+            width: 100%;
+            background-color: burlywood;
+            display: flex;
+            align-items: center;
+            justify-content: center; 
+            flex: 0 0 auto;           
+        }
+
+        footer address
+        {
+            width: 100%;
+            height: 100%;
+        }
+
+        footer ul
+        {
+            height: 100%;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            list-style-type: none;
+        }
+
+        footer ul li{
+            display: block;
+            margin:0 10px;
+            text-align: center;  
+        }
+
+        footer ul li a
+        {
+            text-decoration: none;
+            color: rgb(113, 68, 5);
+        }
+
+        #indexpage {
+            display:flex;
+            justify-content: center;
+            flex-direction: row;
+            flex: 1 0 auto;
+        }
+
+        #indexpage ul{
+            width:300px;
+            list-style-image: url(addnew.png);
+        }
+
+        #indexpage ul {           
+            display: block;           
+            list-style-type: none;  
+        }
+
+        #indexpage ul li a, header ul li a{
+            text-decoration: none;
+            color:#000;           
+        }
+
+        #indexpage ul li a:hover, header ul li a:hover{
+            color:green;
+        }   
+
+        /* typical */
+
+        main {            
+            width:95%; 
+            min-height: var(--main-height);
+            display: flex;    
+            flex-direction: column;  
+            justify-content: center;   
+            align-items: center;
+            margin: 0  auto 20px;     
+            flex: 1 0 auto;     
+        }
+
+        main ul
+        {
+            margin:1em;
+        }
+
+        main form :is(label, input, select, textarea) {
+            
+            margin:2px 0;           
+            display: block;
+            margin-right: 2px;
+        }
+
+        main form :is(input[type="radio"], input[type="checkbox"]) {
+            display:inline-block;           
+        }
+
+        main form :is(input[type="submit"], input[type="reset"], input[type="button"]){
+            padding: 5px 10px;
+            min-width: 100px;
+            background-color: burlywood;
+            border-radius: 5px;
+            border-width: 2px;
+            border-color: rgb(146, 100, 40);
+            border-style: solid;
+        }
+
+        main form input[type="file"]
+        {
+            padding: 2px;           
+            background-color: burlywood;
+            border-radius: 5px;
+            border-width: 2px;
+            border-color: rgb(146, 100, 40);
+            border-style: solid;
+        }     
+
+        main form :is(input[type="submit"], input[type="reset"], input[type="button"], input[type="file"]):hover
+        {
+            cursor: pointer;
+        }
+
+        main form textarea
+        {
+            resize: vertical;               
+        }
+
+        main table {
+            margin:5px 2px;
+        }
+
+        main :is(table, table th, table td)
+        {
+            border:#000 1px solid;
+            border-collapse: collapse;
+        }
+        
+        main table tr :is(th, td)
+        {
+            padding:2px 5px;
+        }
+
+        main table tr td a{
+            color:rgb(146, 100, 40);;            
+        }
+        
+        .form_error
+        {
+        	font-size:small;
+        	font-style:italic;
+        	color:#f00;        	
+        }
+        
+        main .itemListImage
+        {
+        	max-height:100px;
+        	max-width:100px;
+        }
+        
+        main .itemImage
+        {
+        	max-height:200px;
+        	max-width:200px;
+        }
+        
+        #addpos 
+        {
+        	font-size:small;
+        	text-decoration:underline;
+        	color:rgb(146, 100, 40);
+        	font-style:italic;        	
+        }
+        
+        #addpos:hover
+        {
+        	cursor:pointer;
+        }

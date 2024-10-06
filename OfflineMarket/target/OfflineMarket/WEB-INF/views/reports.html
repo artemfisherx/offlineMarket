@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html th:replace="~{typical::typical(~{::title}, ~{::main})}">
+<head>
+<meta charset="UTF-8">
+<title>Reports</title>
+</head>
+<body>
+<main>
+<select id="report">
+	<option value="0"  disabled>--Choose type of report--</option>
+	<option value="1" th:text="#{movement_and_balance_by_date}"></option>
+	<option value="2" th:text="#{movement_by_date}"></option>
+	<option value="3" th:text="#{sales_by_employee}"></option>
+	<option value="4" th:text="#{sales_by_period}"></option>
+</select>
+<div>
+<form id="params">
+</form>
+</div>
+
+
+<script th:inline="javascript">
+$(document).ready(function()
+{	
+	$("#report").on("change", function(){	
+		
+		var report = $("#report").val();
+		
+		if(report==1) $("#params").html('<input type="date"/><div><input type="submit" value="ok"></div>');
+		if(report==2) $("#params").html('<input type="date"/><div><input type="submit" value="ok"></div>');
+		
+		if(report==3) 
+		{
+			var arrEmp = [];
+			var str="";
+			
+			[# th:each="emp : ${employees}"] 
+			arrEmp.push([[${emp}]]);
+			[/]
+			
+			
+			arrEmp.forEach((elem)=>
+				str += `<option value="${elem.id}">${elem.name}</option>`
+			);
+			
+			str = "<select id='emp'>"+str+"<select>";
+			
+			$("#params").html(str);
+			$("#params").append(`<input type="submit" value="ok">`);
+			
+		}
+		
+		if(report==4) $("#params").html('<input type="date" id="start"/> \
+		<input type="date" id="end"/><div><input type="submit" value="ok"></div>');
+		
+	});	
+	
+	
+
+});
+
+
+</script>
+
+</main>
+
+</body>
+</html>

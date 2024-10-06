@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html th:replace="~{typical::typical(~{::title}, ~{::main})}">
+<head>
+<title>Receipt list</title>
+</head>
+<body>
+<main>
+	<a th:href="@{/receipt/add}" th:text="#{receipt_add_new}"></a>
+	<table>
+		<tr>
+			<th>#</th>
+			<th th:text="#{receiptlist_table_id}"></th>
+			<th th:text="#{receiptlist_table_item}"></th>
+			<th th:text="#{receiptlist_table_store}"></th>
+			<th th:text="#{orderlist_table_count}"></th>
+			<th th:text="#{orderlist_table_supplier}"></th>	
+			<th th:text="#{orderlist_table_date}"></th>
+		</tr>	
+		<tr th:each="receipt : ${receipts}">
+			<td th:text="${receiptStat.count}"></td>
+			<td th:text="${receipt.id}"></td>
+			<td th:text="${receipt.store.name}"></td>
+			<td th:text="${receipt.count}"></td>
+			<td th:text="${receipt.supplier.name}"></td>
+			<td th:text="${receipt.datetime}"></td>
+			<td><a th:href="@{'/receipt/edit/' + ${receipt.id}}">Edit</a></td>
+			<td><a th:href="@{/receipt(delete=${receipt.id})}">Delete</a></td>
+		</tr>	
+		
+	</table>
+</main>
+
+</body>
+</html>

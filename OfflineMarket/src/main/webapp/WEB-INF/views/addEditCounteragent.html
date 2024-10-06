@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html th:replace="~{typical::typical(~{::title}, ~{::main})}">
+<head>
+<meta charset="UTF-8">
+<title>Counteragent</title>
+</head>
+<body>
+
+<main>
+<form th:action="@{/counteragent/save}" method="post" th:object="${counteragent}">
+	<input type="hidden" th:field="*{id}"/>
+	
+	<label th:text="#{form_inn}"></label> <input type="text" th:field="*{inn}"/>
+	<p th:if="${#fields.hasErrors('inn')}" th:errors="*{inn}" class="form_error"></p>
+	
+	<label th:text="#{form_name}"></label> <input type="text" th:field="*{name}"/> 
+	<p th:if="${#fields.hasErrors('name')}" th:errors="*{name}" class="form_error"></p>
+	
+	<label th:text="#{form_country}"></label> <input type="text" th:field="*{address.country}"/>
+	<p th:if="${#fields.hasErrors('address.country')}" th:errors="*{address.country}" class="form_error"></p>
+	
+	<label th:text="#{form_city}"></label> <input type="text" th:field="*{address.city}"/>
+	<p th:if="${#fields.hasErrors('address.city')}" th:errors="*{address.city}" class="form_error"></p>
+	
+	<label th:text="#{form_street}"></label> <input type="text" th:field="*{address.street}"/>
+	<p th:if="${#fields.hasErrors('address.street')}" th:errors="*{address.street}" class="form_error"></p>
+	
+	<label th:text="#{form_building}"></label> <input type="text" th:field="*{address.building}"/>
+	<p th:if="${#fields.hasErrors('address.building')}" th:errors="*{address.building}" class="form_error"></p>
+	
+	<input type="submit" th:value="#{form_submit_save}"/>
+</form>
+</main>
+
+</body>
+</html>

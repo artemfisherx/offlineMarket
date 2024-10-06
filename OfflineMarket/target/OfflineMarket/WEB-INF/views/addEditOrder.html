@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html th:replace="~{typical::typical(~{::title},~{::main})}">
+<head>
+<meta charset="UTF-8">
+<title>Order</title>
+</head>
+<body>
+<main>
+<form th:action="@{/order/save}" method="post" th:object="${order}" id="orderForm">
+<input type="hidden" th:field="*{id}">
+<input type="datetime-local" th:field="*{datetime}">
+
+<label th:text="#{form_seller}"></label>
+<select th:field="*{seller}">
+	<option th:each="emp : ${employees}" th:value="${emp}" th:text="${{emp}}"></option>
+</select>
+<label th:text="#{form_counteragent}"></label>
+<select th:field="*{client}">
+	<option th:each="agent : ${agents}" th:value="${agent}" th:text="${{agent}}"></option>
+</select>
+
+<table id="rows">
+<th:block th:if="*{positions.size()}>0">
+	<tr th:each="pos : *{positions}">
+		<td>
+			<input type="hidden" name="ids" class="ids" th:value="${pos.id}">
+			<select name="items" class="items">
+				<option th:each="item : ${items}" th:value="${item}" th:text="${{item}}" th:selected="${item.id}==${pos.item.id}"></option>
+			</select>
+		</td>
+		<td>
+			<select name="stores" class="stores">
+				<option th:each="store : ${stores}" th:value="${store}" th:text="${{store}}" th:selected="${store.id}==${pos.store.id}"></option>
+			</select>
+		</td>
+		<td>
+			<input name="count" class="count" type="number" min="1" size="3" th:value="${pos.count}"/>
+		</td>
+		<td>
+			<input type="button" class="delpos" th:value="#{form_delete_position}">
+		</td>
+	</tr>
+</th:block>
+<th:block th:unless="*{positions.size()}>0">
+	<tr>
+		<td>		
+			<input type="hidden" name="ids" class="ids" value="0">	
+			<select name="items" class="items">
+				<option th:each="item : ${items}" th:value="${item}" th:text="${{item}}"></option>
+			</select>
+		</td>
+		<td>
+			<select name="stores" class="stores">
+				<option th:each="store : ${stores}" th:value="${store}" th:text="${{store}}"></option>
+			</select>
+		</td>
+		<td>
+			<input name="count" class="count" type="number" min="1" value="1" size="3"/>
+		</td>
+		<td>
+			<input type="button" class="delpos" th:value="#{form_delete_position}">
+		</td>
+	</tr>
+</th:block>
+</table>
+
+<p id="addpos" th:text="#{form_add_new_pos}"/>
+<input type="submit" th:value="#{form_submit_save}">
+</form>
+
+<script th:inline="javascript">
+/*<![CDATA[*/
+$(document).ready(function(){
+	
+	var arrItems = [];
+	var rowItems = "";
+	
+	/*[# th:each="item : ${items}"]*/
+    arrItems.push([[${item}]]);
+	/*[/]*/
+	
+	console.log(arrItems);
+	
+	arrItems.forEach((elem)=>
+		rowItems += `<option value="${elem.id}">${elem.itemNumber} ${elem.name}</option>`
+	);
+	
+	rowItems= "<select class='items' name='items'>"+rowItems+"</select>";
+		
+	console.log(rowItems);
+	
+	
+	var arrStores = [];
+	var rowStores = "";
+	
+	/*[# th:each="store : ${stores}"]*/
+    arrStores.push([[${store}]]);
+	/*[/]*/
+	
+	console.log(arrStores);
+	
+	
+	arrStores.forEach((elem)=>
+		rowStores += `<option value="${elem.id}">${elem.name}</option>`
+	);
+	
+	rowStores = "<select class='stores' name='stores'>" + rowStores + "</select>";
+	
+		
+	console.log(rowStores);
+		
+		
+	$('#addpos').on("click", function(){		
+		$('#rows').append(
+		`<tr>
+			<td>
+				<input type="hidden" name="ids" class="ids" value="0">	
+				${rowItems}
+			</td>
+			<td>
+				${rowStores}
+			</td>
+			<td>
+				<input type="number" class="count" name='count' min="1" value="1" size="3"/>
+			</td>
+			<td>
+				<input type="button" class="delpos" value=[[#{form_delete_position}]]>
+			</td>
+		</tr>
+		`		
+		);
+	});
+	
+	
+	$('#rows').on("click", ".delpos", function(){		
+		$(this).closest("tr").remove();		
+	});
+	
+	
+	$('#orderForm').submit(function(event)
+		{
+			event.preventDefault();	
+			
+			var id = $('#id').val();
+			var datetime = $('#datetime').val();
+			var seller = $('#seller').val();
+			var client = $('#client').val();
+			
+			/*
+			var items = document.querySelectorAll('[data-type="items"]');
+			items.forEach((elem)=>
+				console.log(elem)
+			);
+			*/
+			
+			$(".items").each(function(){
+				console.log($(this).val());
+			});
+			
+			$(".stores").each(function(){
+				console.log($(this).val());
+			});
+			
+			$(".count").each(function(){
+				console.log($(this).val());
+			});
+			
+			var data = $("#orderForm").serialize();			
+			var url = /*[[@{/order/save}]]*/ "";
+			
+			console.log(data);
+			
+			$.ajax({
+				method: "POST",
+				url: url,
+				data: data
+			})
+				.done(function(){
+					window.location.replace(/*[[@{/order}]]*/ "/");
+				
+				})
+				.fail(function(jqXHR, textStatus, errorThrown) {
+					alert(jqXHR.responseText);
+				  console.log("Request failed: " + textStatus);
+				  console.log("Request failed: " + JSON.stringify(jqXHR));
+				  console.log("Request failed: " + errorThrown);
+			});				
+			
+			
+		});
+	
+	
+});
+/*]]>*/
+</script>
+
+</main>
+</body>
+</html>

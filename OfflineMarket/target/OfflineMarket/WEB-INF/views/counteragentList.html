@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html th:replace="~{typical::typical(~{::title}, ~{::main})}">
+<head>
+<meta charset="UTF-8">
+<title>Counteragent list</title>
+</head>
+<body>
+<main>
+	<form method="post" enctype="multipart/form-data">
+		<input type="file" name="agentfile">
+		<input type="submit" value="Upload counteragent">
+	</form>
+	<table>
+		<tr>
+			<th>#</th>
+			<th th:text="#{agent_table_id}"></th>
+			<th th:text="#{agent_table_inn}"></th>
+			<th th:text="#{agent_table_name}"></th>
+			<th th:text="#{agent_table_address}"></th>
+			<th></th>
+			<th></th>
+			<th></th>
+		</tr>
+		<tr th:each="agent : ${agents}">
+			<td th:text="${agentStat.count}"></td>
+			<td th:text="${agent.id}"></td>
+			<td th:text="${agent.inn}"></td>
+			<td th:text="${agent.name}"></td>
+			<td th:text="${agent.address}"></td>
+			<td><a th:href="@{'/counteragent/edit/'+${agent.id}}" th:text="#{action_edit}"></a></td>
+			<td><a th:href="@{/counteragent(download=${agent.id})}" th:text="#{action_download}"></td>	
+			<td><a th:href="@{/counteragent(delete=${agent.id})}" th:text="#{action_delete}"></td>			
+		</tr>
+		
+	</table>
+</main>
+</body>
+</html>

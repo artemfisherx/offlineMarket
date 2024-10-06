@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html th:replace="~{typical::typical(~{::title}, ~{::main})}">
+<head>
+<meta charset="UTF-8">
+<title>Employee</title>
+</head>
+<body>
+<main>
+	<form method="post" th:action="@{/employee/save}" th:object="${employee}">
+	<input type="hidden" th:field="*{id}">
+	
+	<label th:text="#{form_name}"></label>	
+	<input type="text" th:field="*{name}">
+	
+	<label th:text="#{form_surname}"></label>	
+	<input type="text" th:field="*{surname}">
+	
+	<label th:text="#{form_position}"></label>	
+	<input type="text" th:field="*{position}">
+	
+	<label th:text="#{form_tzone}"></label>
+	<select th:field="*{tzone}">
+		<option th:each="zone : ${T(mainPackage.Entities.Employee.TZone).values()}"
+		th:value="${zone}" th:text="${zone}">
+	</select>		
+	<input type="submit" th:value="#{form_submit_save}">
+	</form>
+</main>
+</body>
+</html>

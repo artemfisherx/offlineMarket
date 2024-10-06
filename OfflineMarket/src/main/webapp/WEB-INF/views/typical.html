@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html th:fragment="typical(title, main)">
+<head>
+    <link th:href="@{/styles/style.css}" rel="stylesheet" />
+	<script th:src="@{/scripts/jquery-3.7.1.min.js}"></script>
+	<title th:replace="${title}">Typical</title>
+</head>
+<body>
+    <header>
+        <div id="logo">
+        </div>
+        <nav>
+            <ul>
+            	<li><a th:href="@{/}" th:text="#{header_main}"></a></li>
+                <li><a th:href="@{/order}" th:text="#{header_orders}"></a></li>
+                <li><a th:href="@{/counteragent}" th:text="#{header_counteragents}"></a></li>
+                <li><a th:href="@{/item}" th:text="#{header_items}"></a></li>
+                <li><a th:href="@{/store}" th:text="#{header_stores}"></a></li>
+                <li><a th:href="@{/employee}" th:text="#{header_employees}"></a></li>
+                <li><a th:href="@{/report}" th:text="#{header_reports}">Reports</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main th:replace="${main}">
+        <ul>
+            <li><a href="">Список 1 строка 1</a></li>
+            <li><a href="">Список 1 строка 2</a></li>
+            <li><a href="">Список 1 строка 3</a></li>
+            <li><a href="">Список 1 строка 4</a></li>
+            <li>Список 1 строка 5</a></li>
+        </ul>       
+
+        <ul>
+            <li><a href="">Список 2 строка 1</a></li>
+            <li><a href="">Список 2 строка 2</a></li>
+            <li><a href="">Список 2 строка 3</a></li>
+            <li><a href="">Список 2 строка 4</a></li>
+            <li>Список 2 строка 5</a></li>  
+        </ul>   
+
+        <ol>
+            <li><a href="">Список 3 строка 1</a></li>
+            <li><a href="">Список 3 строка 2</a></li>
+            <li><a href="">Список 3 строка 3</a></li>
+            <li><a href="">Список 3 строка 4</a></li>
+            <li>Список 3 строка 5</a></li>  
+        </ol>   
+        
+        <form>
+            <label>Name <input type="text"></label>
+            <label>Password <input type="password"></label>
+            <label for="city">City</label>
+            <select>
+                <option>Moscow</option>
+                <option>London</option>
+            </select>
+            <label><input type="radio" name="gender">Man</label>
+            <label><input type="radio" name="gender">Woman</label>
+
+            <label><input type="checkbox" name="gender">Have money</label>
+            <label><input type="checkbox" name="gender">Have the apartment</label>
+
+            <label>E-mail<input type="email"></label>
+            <label>Date <input type="date"></label>
+
+            <label>Number <input type="number"></label>
+
+            <label>File <input type="file"></label>
+
+            <label> Textarea <textarea></textarea></label>
+
+            <input type="reset" value="Reset">
+            <input type="button" value="Button">
+            <input type="submit" value="Send">
+
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>№</th>
+                        <th>Фамилия</th>
+                        <th>Имя</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>Иванов</td>
+                        <td>Иван</td>
+                        <td><a href="">Удалить</a></td>
+                    </tr> 
+                    <tr>
+                        <td>2</td>
+                        <td>Петров</td>
+                        <td>Петр</td>
+                        <td><a href="">Удалить</a></td>
+                    </tr> 
+                    <tr>
+                        <td>3</td>
+                        <td>Сидоров</td>
+                        <td>Глеб</td>
+                        <td><a href="">Удалить</a></td>
+                    </tr> 
+                </tbody>
+            </table>
+        </form>
+
+        <p>
+            Луганску 13 апреля, сообщил глава ЛНР Леонид Пасечник.РЕН ТВ
+            Медики оказывают пострадавшим всю необходимую помощь.Профиль
+            Сотрудники администрации города оценивают ущерб, причиненный жителям Луганска в результате обстрела.Российская газета
+            Председатель движения "Мы вместе с Россией" Владимир Рогов сообщал, что в результате атаки ранения получили шесть
+        </p>
+
+    </main>
+
+    <footer>
+        <address>
+            <ul>
+            	<li><a href="">About</a></li>
+            	<li><a href="">Contacts</a></li>
+            	<li><a href="">Github</a></li>
+            </ul>
+        </address>
+    </footer>
+</body>
+</html>
